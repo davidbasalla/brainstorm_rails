@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>BrainstormRails</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>BrainstormRails</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <div class="pure-menu pure-menu-horizontal">
+      <a href="#" class="pure-menu-heading">BrainStorm</a>
+      
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected" id="loadButton"><a href="#" class="pure-menu-link">Load</a></li>
+        <li class="pure-menu-item"><a href="#" id="saveAsButton" class="pure-menu-link">Save</a></li>
+        <li class="pure-menu-item"><a href="#" id="clearButton" class="pure-menu-link">Clear</a></li>
+        <li class="pure-menu-item"><a href="#" id="aboutButton" class="pure-menu-link">Instructions</a></li>
+      </ul>
+    </div>
 
-</body>
+    <%= yield %>
+
+  </body>
 </html>
