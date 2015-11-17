@@ -10,6 +10,9 @@ class SketchesController < ApplicationController
   # GET /sketches/1
   # GET /sketches/1.json
   def show
+    @sketches = Sketch.all
+    @sketch = @sketches.first if @sketch.nil?
+    #TODO need to cater for possibility of no sketch being present?
   end
 
   # GET /sketches/new
@@ -64,7 +67,9 @@ class SketchesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sketch
-      @sketch = Sketch.find(params[:id])
+      if params[:id]
+        @sketch = Sketch.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

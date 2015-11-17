@@ -1,9 +1,37 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-<p>
-  <strong>Name:</strong>
-  <%= @sketch.name %>
-</p>
+<td class="index-layout-column">
 
-<%= link_to 'Edit', edit_sketch_path(@sketch) %> |
-<%= link_to 'Back', sketches_path %>
+  <span class="title">
+    BrainStorm
+  </span>
+
+  <ul class="sketch-list">
+    <% @sketches.each do |sketch| %>
+      <% if sketch == @sketch %>
+        <li class="sketch-list-item sketch-list-item-active">
+      <% else %>
+        <li class="sketch-list-item">
+      <% end %>
+        <%= link_to sketch.name, sketch %>
+      </li>
+    <% end %>
+  </ul>
+</td>
+
+<td>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a href="#" class="pure-menu-link">New</a></li>
+      <li class="pure-menu-item"><a href="#" id="saveAsButton" class="pure-menu-link">Rename</a></li>
+      <li class="pure-menu-item"><a href="#" id="saveAsButton" class="pure-menu-link">Delete</a></li>
+      <li class="pure-menu-item"><a href="#" id="clearButton" class="pure-menu-link">Clear</a></li>
+      <li class="pure-menu-item"><a href="#" id="aboutButton" class="pure-menu-link">Instructions</a></li>
+    </ul>
+  </div>
+
+  <canvas id="canvas1" width="800" height="600">
+    This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
+
+</td>
