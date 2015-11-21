@@ -27,7 +27,7 @@ class SketchesController < ApplicationController
   # POST /sketches
   # POST /sketches.json
   def create
-    @sketch = Sketch.new(sketch_params)
+    @sketch = Sketch.new(name: new_sketch_name)
 
     respond_to do |format|
       if @sketch.save
@@ -59,21 +59,25 @@ class SketchesController < ApplicationController
   def destroy
     @sketch.destroy
     respond_to do |format|
-      format.html { redirect_to sketches_url, notice: 'Sketch was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Sketch was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sketch
-      if params[:id]
-        @sketch = Sketch.find(params[:id])
-      end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sketch
+    if params[:id]
+      @sketch = Sketch.find(params[:id])
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sketch_params
-      params.require(:sketch).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sketch_params
+    params.require(:sketch).permit(:name)
+  end
+
+  def new_sketch_name
+    "sketch_#{Sketch.all.count}"
+  end
 end

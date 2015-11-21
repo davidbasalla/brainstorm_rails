@@ -22,9 +22,16 @@
 <td>
   <div class="pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
-      <li class="pure-menu-item"><a href="#" class="pure-menu-link">New</a></li>
-      <li class="pure-menu-item"><a href="#" id="saveAsButton" class="pure-menu-link">Rename</a></li>
-      <li class="pure-menu-item"><a href="#" id="saveAsButton" class="pure-menu-link">Delete</a></li>
+      <li class="pure-menu-item">
+        <%= link_to 'New', sketches_path, method: :post, class: "pure-menu-link" %>
+      </li>
+      <li class="pure-menu-item">
+        <% if @sketch %>
+          <%= link_to 'Delete', @sketch, method: :delete, class: "pure-menu-link" %>
+        <% else %>
+          <%= link_to 'Delete', nil, class: "pure-menu-link" %>
+        <% end %>
+      </li>
       <li class="pure-menu-item"><a href="#" id="clearButton" class="pure-menu-link">Clear</a></li>
       <li class="pure-menu-item"><a href="#" id="aboutButton" class="pure-menu-link">Instructions</a></li>
     </ul>
