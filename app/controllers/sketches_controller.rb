@@ -43,15 +43,8 @@ class SketchesController < ApplicationController
   # PATCH/PUT /sketches/1
   # PATCH/PUT /sketches/1.json
   def update
-    respond_to do |format|
-      if @sketch.update(sketch_params)
-        format.html { redirect_to @sketch, notice: 'Sketch was successfully updated.' }
-        format.json { render :show, status: :ok, location: @sketch }
-      else
-        format.html { render :edit }
-        format.json { render json: @sketch.errors, status: :unprocessable_entity }
-      end
-    end
+    @sketch.update(sketch_params)
+    render :nothing => true
   end
 
   # DELETE /sketches/1
@@ -74,7 +67,7 @@ class SketchesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def sketch_params
-    params.require(:sketch).permit(:name)
+    params.require(:sketch).permit(:name, :node_data)
   end
 
   def new_sketch_name

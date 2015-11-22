@@ -1,35 +1,43 @@
 function MainApp() {
-    
-    console.log("INIT");
-    this.s = new CanvasState(document.getElementById('canvas1'));
-    this.s.ctx.lineWidth = 4;
-    
-    //load stored data or default
-    if (!this.loadStorage())
-  this.loadDefault();
+  this.s = new CanvasState(document.getElementById('canvas1'));
+  this.s.ctx.lineWidth = 4;
+
+  this.current_sketch = $('#canvas1').data('sketch-id');
+
+  //TODO - remove concept of storage
+
+  //load stored data or default
+  if (!this.loadStorage()){
+    this.loadDefault();
+  }
 }
 
 MainApp.prototype.clear = function(){
+  //delete connections
+  this.s.shapes =[];
 
-    //delete connections
-    this.s.shapes =[];
+  //delete shapes
+  this.s.connections =[];
 
-    //delete shapes
-    this.s.connections =[];
+  //reset tmp storage
+  this.selection = [];
+  this.hoverSelection = [];
+  this.connectionSelection = null;
+  this.dragSelect = false;   
 
+  //force redraw
+  this.s.valid = false;
 
-    //reset tmp storage
-    this.selection = [];
-    this.hoverSelection = [];
-    this.connectionSelection = null;
-    this.dragSelect = false;   
+  //update storage
+  this.s.setStorageData('shapes');
+  this.s.setStorageData('connections');
+};
 
-    //force redraw
-    this.s.valid = false;
-
-    //update storage
-    this.s.setStorageData('shapes');
-    this.s.setStorageData('connections');
+MainApp.prototype.loadSketch = function(){
+  //clear canvas
+  //get the JSON from appropriate sketch (from the data attribute from the view)
+  //call loadShapes
+  //call loadConnections
 };
 
 MainApp.prototype.loadStorage = function(){
@@ -77,7 +85,7 @@ MainApp.prototype.loadShapes = function(shapes){
   var elem = shapes[i];
 
   var shape = new Shape(elem.x, elem.y, "square","");
-  shape.setText(elem.text, this.s.ctx)
+  shape.setText(elem.text, this.s.ctx);
   shape.shapeId = elem.shapeId;
   shape.fill = elem.fill;
   
@@ -98,7 +106,7 @@ MainApp.prototype.loadConnections = function(connections){
   //dont create again, just loop through already existing ones...
   
   var origShape = null;
-  for (index in this.s.shapes){
+  for (var index in this.s.shapes){
       
       if (this.s.shapes[index].shapeId === connection.origShape.shapeId){
     origShape = this.s.shapes[index];
@@ -125,37 +133,21 @@ MainApp.prototype.loadConnections = function(connections){
     }
 };
 
-
-
-
 MainApp.prototype.save = function(){
+  var combinedText = {
+    shapes: this.s.shapes,
+    connections: this.s.connections
+  };
+    
+  var jsonData = JSON.stringify(combinedText);
 
-    //SAVE THE DATA AS JSON FORMAT HERE...
-    
-    var combinedText = {
-  shapes: this.s.shapes,
-  connections: this.s.connections
-    };
-    
-    var jsonText = JSON.stringify(combinedText);
-    
-    var data = new Blob([jsonText], {type: 'text/plain'});
-    var textFile = null;
-    
-    // If we are replacing a previously generated file we need to
-    // manually revoke the object URL to avoid memory leaks.
-    if (textFile !== null) {
-  window.URL.revokeObjectURL(textFile);
-    }
-    
-    textFile = window.URL.createObjectURL(data);
-    
-    var link = document.getElementById('downloadlink');
-    link.href = textFile;
-    
-    link.click();
+  $.ajax({
+      method: 'PUT',
+      url: "/sketches/" + this.current_sketch,
+      dataType: 'JSON',
+      data: {sketch: {node_data: jsonData}}
+      });
 };
-
 
 MainApp.prototype.load = function(file){
 

@@ -26,6 +26,9 @@
         <%= link_to 'New', sketches_path, method: :post, class: "pure-menu-link" %>
       </li>
       <li class="pure-menu-item">
+        <%= link_to 'Save', 'javascript:;', id: "saveAsButton", class: "pure-menu-link" %>
+      </li>
+      <li class="pure-menu-item">
         <% if @sketch %>
           <%= link_to 'Delete', @sketch, method: :delete, class: "pure-menu-link" %>
         <% else %>
@@ -37,9 +40,7 @@
     </ul>
   </div>
 
-  <div onLoad='init()'>
-    <canvas id="canvas1" width="800" height="600">
-      This text is displayed if your browser does not support HTML5 Canvas.
-    </canvas>
-  </div>
+  <canvas id="canvas1" data-sketch-id=<%= @sketch.id %> width="800" height="600">
+    This text is displayed if your browser does not support HTML5 Canvas.
+  </canvas>
 </td>
