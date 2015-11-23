@@ -40,7 +40,7 @@
     </ul>
   </div>
 
-  <canvas id="canvas1" data-sketch-id=<%= @sketch.id %> width="800" height="600">
+  <canvas id="canvas1" data-sketch-id=<%= @sketch.id if @sketch %> width="800" height="600">
     This text is displayed if your browser does not support HTML5 Canvas.
   </canvas>
 </td>

@@ -12,6 +12,12 @@ class SketchesController < ApplicationController
   def show
     @sketches = Sketch.all
     @sketch = @sketches.first if @sketch.nil?
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @sketch }
+    end
+
     #TODO need to cater for possibility of no sketch being present?
   end
 
