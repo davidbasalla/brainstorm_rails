@@ -4,14 +4,7 @@ function MainApp() {
 
   this.current_sketch_id = $('#canvas1').data('sketch-id');
 
-  //TODO - remove concept of storage
-
   this.loadSketch();
-
-  //load stored data or default
-  // if (!this.loadStorage()){
-  //   this.loadDefault();
-  // }
 }
 
 MainApp.prototype.clear = function(){
@@ -36,45 +29,20 @@ MainApp.prototype.clear = function(){
 };
 
 MainApp.prototype.loadSketch = function(){
-
-  console.log('LOAD SKETCH');
   this.clear();
 
   var callback = function(response) {
-    console.log("HOLLA");
-    console.log(response);
     this.loadShapes(response.node_data.shapes);
     this.loadConnections(response.node_data.connections);
   }.bind(this);
   $.get('/sketches/' + this.current_sketch_id, undefined, callback, 'json');
 };
 
-MainApp.prototype.loadStorage = function(){
-
-  var val = false;
-
-  var shapes = JSON.parse(localStorage.shapes);
-  var connections = JSON.parse(localStorage.connections);
-
-  if(shapes){
-    this.loadShapes(shapes);
-    val = true;
-  }
-  if(connections){
-    this.loadConnections(connections);
-    val = true;
-  }
-  
-  this.s.valid = false;
-
-  return val;
-};
-
 MainApp.prototype.loadDefault = function(){
 
-    var shape1 = new Shape(100, 150);
-    var shape2 = new Shape(300, 150, "square", "sampleText");
-    var shape3 = new Shape(200, 50);
+    var shape1 = new Shape(100, 150, null, null, this.s.ctx);
+    var shape2 = new Shape(300, 150, "square", "sampleText", this.s.ctx);
+    var shape3 = new Shape(200, 50, null, null, this.s.ctx);
     shape3.fill = 'lightgreen';
 
     var connec = new Connection(shape3, shape2);

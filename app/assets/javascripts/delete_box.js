@@ -1,7 +1,9 @@
-function DeleteBox(x, y){
+function DeleteBox(x, y, ctx){
     
     this.x = x;
     this.y = y;
+    this.ctx = ctx;
+
     this.w = 8;
     this.offset = 5;
 }
@@ -14,20 +16,21 @@ DeleteBox.prototype.contains = function(mx, my) {
 };
 
 DeleteBox.prototype.draw = function(ctx){
+    this.ctx = ctx;
+
+    this.ctx.strokeStyle = 'lightgrey';
     
-    ctx.strokeStyle = 'lightgrey';
-    
-    ctx.lineWidth = 4;
-    ctx.beginPath();
+    this.ctx.lineWidth = 4;
+    this.ctx.beginPath();
 
     var y = this.y + this.offset;
 
-    ctx.moveTo(this.x, y);
-    ctx.lineTo(this.x + this.w, y + this.w);
+    this.ctx.moveTo(this.x, y);
+    this.ctx.lineTo(this.x + this.w, y + this.w);
     
-    ctx.moveTo(this.x + this.w, y);
-    ctx.lineTo(this.x, y + this.w);
+    this.ctx.moveTo(this.x + this.w, y);
+    this.ctx.lineTo(this.x, y + this.w);
     
-    ctx.closePath();
-    ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.stroke();
 };
