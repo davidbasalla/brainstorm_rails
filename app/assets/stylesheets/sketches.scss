@@ -1,3 +1,49 @@
 // Place all the styles related to the sketches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#myModal {
+    position: absolute;
+    top:0px;
+    right:0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.color-box {    
+    display: inline-block;
+    width:23px;
+    height:23px;    
+    padding-left: 10px;
+    padding-right: 10px;    
+    margin-right: 5px;
+    margin-left: 5px;
+    border: 1px solid black;
+}
+#colorBox1 {
+    background-color: #BBB;
+}
+#colorBox2 {
+    background-color: white;
+}
+#colorBox3 {
+    background-color: grey;
+}
+#colorBox4 {
+    background-color: lightgreen;
+}
+#colorBox5 {
+    background-color: #F66;
+}
+.color-box-selected{
+    border: 4px solid lightblue;
+    padding-left: 7px;
+    padding-right: 7px;    
+    margin-right: 5px;
+    margin-left: 5px;    
+
+}
+#nodeText {
+    width: 100%;
+}

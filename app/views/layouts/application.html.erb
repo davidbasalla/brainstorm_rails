@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>BrainstormRails</title>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -14,6 +14,125 @@
           <%= yield %>
         </tr>
       </table>
+    </div>
+
+
+
+<div class="modal bs-example-modal-sm" id="myModal">
+      <div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" 
+        aria-label="Cancel"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Edit node</h4>
+    </div>
+    <div class="modal-body">
+
+
+            <p>
+        <!--<input type="text" name="nodeText" id="nodeText"
+         value="nodeText">-->
+        <textarea rows="2" id="nodeText"></textarea>
+
+
+
+      </p>
+
+
+      <!--<div class="color-box"></div>-->
+      <input type="text" class="color-box color-box-selected" 
+       title="Set Color"
+       data-container="body"
+       id="colorBox1"
+       readonly>
+
+      <input type="text" class="color-box" 
+       title="Set Color"
+       data-container="body"
+       id="colorBox2"
+       readonly>
+
+      <input type="text" class="color-box" 
+       title="Set Color"
+       data-container="body"
+       id="colorBox3"
+       readonly>
+
+      <input type="text" class="color-box" 
+       title="Set Color"
+       data-container="body"
+       id="colorBox4"
+       readonly>
+
+      <input type="text" class="color-box" 
+       title="Set Color"
+       data-container="body"
+       id="colorBox5"
+       readonly>
+
+
+
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="modalok">Ok</button>
+            <button type="button" class="btn btn-default" 
+        data-dismiss="modal">Cancel</button>
+
+    </div>
+  </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- ABOUT Modal -->
+    <div class="modal" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">About</h4>
+    </div>
+    <div class="modal-body">
+
+      A light weight application for creating mind maps for
+      brain storming, built with JavaScript, HTML5 Canvas,
+      Twitter Bootstrap and Pure. Extended from cool example by <a href =
+      "http://simonsarris.com/blog/510-making-html5-canvas-useful"
+      target="_blank">
+      Simon Harris</a>.
+
+      <h2> Instructions </h2>
+
+      Double-click on empty space to create a Node. <br><br>
+
+      Click to select a Node.
+
+      Select and drag to move a Node. <br><br>
+
+      Click and drag on empty space to select multiple
+      Nodes. Click on one of these nodes and drag to move all
+      nodes. <br><br>
+
+      Double-click on a Node to edit text and color.<br><br>
+
+      Click the 'x' on a Node to delete it.<br><br>
+
+      Click on the small black box below a Node and drag to create a
+      Connection. Drag the connection over another Node to
+      complete a Connection. <br><br>
+
+      Hover over a connection and click to reassign it. Not
+      assigning it while dragging will delete the connection. <br><br>
+
+
+
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+      </div>
     </div>
 
   </body>

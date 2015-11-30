@@ -10,7 +10,7 @@ class SketchesController < ApplicationController
   # GET /sketches/1
   # GET /sketches/1.json
   def show
-    @sketches = Sketch.all
+    @sketches = Sketch.order(:created_at)
     @sketch = @sketches.first if @sketch.nil?
 
     respond_to do |format|
