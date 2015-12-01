@@ -29,6 +29,8 @@ gem "therubyracer"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'omniauth-facebook'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

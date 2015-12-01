@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'sketches#show'
 
+  get '/auth/:provider/callback' => 'sessions#create'
+
+  get '/signout' => 'sessions#destroy', :as => :signout
+
+  post '/signin' => 'sessions#new', :as => :signin
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
