@@ -1,39 +1,25 @@
 class SketchesController < ApplicationController
   before_action :set_sketch, only: [:show, :edit, :update, :destroy]
 
-  # GET /sketches
-  # GET /sketches.json
-  def index
-    @sketches = Sketch.all
-  end
-
   # GET /sketches/1
   # GET /sketches/1.json
   def show
-    @sketches = Sketch.order(:created_at)
-    @sketch = @sketches.first if @sketch.nil?
+    @sketches = Sketch.where(user_id: current_user.id).order(updated_at: :desc) if current_user
+    @sketch = @sketches.first if @sketches && @sketch.nil?
 
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @sketch }
     end
-
-    #TODO need to cater for possibility of no sketch being present?
-  end
-
-  # GET /sketches/new
-  def new
-    @sketch = Sketch.new
-  end
-
-  # GET /sketches/1/edit
-  def edit
   end
 
   # POST /sketches
   # POST /sketches.json
   def create
+    redirect_to '/auth/facebook' and return if current_user.nil?
+
     @sketch = Sketch.new(name: new_sketch_name)
+    @sketch.user_id = current_user.id
 
     respond_to do |format|
       if @sketch.save
@@ -49,6 +35,8 @@ class SketchesController < ApplicationController
   # PATCH/PUT /sketches/1
   # PATCH/PUT /sketches/1.json
   def update
+    redirect_to '/auth/facebook' and return if current_user.nil?
+
     @sketch.update(sketch_params)
     render :nothing => true
   end
@@ -56,6 +44,8 @@ class SketchesController < ApplicationController
   # DELETE /sketches/1
   # DELETE /sketches/1.json
   def destroy
+    redirect_to '/auth/facebook' and return if current_user.nil?
+
     @sketch.destroy
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Sketch was successfully destroyed.' }

@@ -8,14 +8,16 @@
   </span>
 
   <ul class="sketch-list">
-    <% @sketches.each do |sketch| %>
-      <% if sketch == @sketch %>
-        <li class="sketch-list-item sketch-list-item-active">
-      <% else %>
-        <li class="sketch-list-item">
+    <% if @sketches %>
+      <% @sketches.each do |sketch| %>
+        <% if sketch == @sketch %>
+          <li class="sketch-list-item sketch-list-item-active">
+        <% else %>
+          <li class="sketch-list-item">
+        <% end %>
+          <%= link_to sketch.name, sketch %>
+        </li>
       <% end %>
-        <%= link_to sketch.name, sketch %>
-      </li>
     <% end %>
   </ul>
 </td>
