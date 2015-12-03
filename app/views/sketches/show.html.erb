@@ -22,33 +22,36 @@
   </ul>
 </td>
 
-<td>
-  <div class="pure-menu pure-menu-horizontal">
-    <ul class="pure-menu-list">
-      <li class="pure-menu-item">
-        <%= link_to 'New', sketches_path, method: :post, class: "pure-menu-link" %>
-      </li>
-      <li class="pure-menu-item">
-        <%= link_to 'Save', 'javascript:;', id: "saveAsButton", class: "pure-menu-link" %>
-      </li>
-      <li class="pure-menu-item">
-        <% if @sketch %>
-          <%= link_to 'Delete', @sketch, method: :delete, class: "pure-menu-link" %>
-        <% else %>
-          <%= link_to 'Delete', nil, class: "pure-menu-link" %>
-        <% end %>
-      </li>
-      <li class="pure-menu-item"><a href="#" id="clearButton" class="pure-menu-link">Clear</a></li>
-      <li class="pure-menu-item"><a href="#" id="aboutButton" class="pure-menu-link">Instructions</a></li>
-      <li class="pure-menu-item">
-        <% if current_user %>
-          <%= current_user.name %>
-          <%= link_to 'Logout', '../signout' %>
-        <% else %>
-          <%= link_to 'Login with Facebook', '../auth/facebook' %>
-        <% end %>
-      </li>
-    </ul>
+<td id="view-column">
+  <div class="view-column-header">
+    <div class="sketch-navbar">
+      <ul class="sketch-navbar-list">
+        <li class="sketch-navbar-item">
+          <%= link_to 'New', sketches_path, method: :post, class: "pure-menu-link" %>
+        </li>
+        <li class="sketch-navbar-item">
+          <%= link_to 'Save', 'javascript:;', id: "saveAsButton", class: "pure-menu-link" %>
+        </li>
+        <li class="sketch-navbar-item">
+          <% if @sketch %>
+            <%= link_to 'Delete', @sketch, method: :delete, class: "pure-menu-link" %>
+          <% else %>
+            <%= link_to 'Delete', nil, class: "pure-menu-link" %>
+          <% end %>
+        </li>
+        <li class="sketch-navbar-item"><a href="#" id="clearButton" class="pure-menu-link">Clear</a></li>
+        <li class="sketch-navbar-item"><a href="#" id="aboutButton" class="pure-menu-link">Instructions</a></li>
+      </ul>
+    </div>
+
+    <div class="login-field">
+      <% if current_user %>
+        <%= current_user.name %>
+        <%= link_to 'Logout', '../signout' %>
+      <% else %>
+        <%= link_to 'Login with Facebook', '../auth/facebook' %>
+      <% end %>
+    </div>
   </div>
 
   <canvas id="canvas1" data-sketch-id=<%= @sketch.id if @sketch %> width="800" height="600">

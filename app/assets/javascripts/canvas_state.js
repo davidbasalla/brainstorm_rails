@@ -2,7 +2,7 @@ function CanvasState(canvas) {
   // **** First some setup! ****
 
   this.canvas = canvas;
-  this.canvas.width = document.body.clientWidth; //document.width is obsolete
+  this.canvas.width = $('#view-column').width();
   this.canvas.height = document.body.clientHeight * 2; //document.height is obsolete
 
   this.width = canvas.width;

@@ -47,3 +47,29 @@
 #nodeText {
     width: 100%;
 }
+
+.login-field {
+    float: right;
+    padding-right: 1.5em;
+    padding-top: 0.5em;
+}
+
+.pure-menu-horizontal {
+    float: left;
+    width: 300px;
+}
+
+
+.sketch-navbar {
+    float: left;
+}
+
+.sketch-navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.sketch-navbar-item {
+    display: inline-table;
+}
