@@ -10,7 +10,6 @@ function MainApp() {
 MainApp.prototype.clear = function(){
   //delete connections
   this.s.shapes =[];
-
   //delete shapes
   this.s.connections =[];
 
@@ -20,13 +19,17 @@ MainApp.prototype.clear = function(){
   this.connectionSelection = null;
   this.dragSelect = false;   
 
-  //force redraw
-  this.s.valid = false;
+  this.forceRedraw();
 
   //update storage
   this.s.setStorageData('shapes');
   this.s.setStorageData('connections');
 };
+
+MainApp.prototype.forceRedraw = function(){
+  this.s.valid = false;
+};
+
 
 MainApp.prototype.loadSketch = function(){
   this.clear();
@@ -34,6 +37,7 @@ MainApp.prototype.loadSketch = function(){
   var callback = function(response) {
     this.loadShapes(response.node_data.shapes);
     this.loadConnections(response.node_data.connections);
+    this.forceRedraw();
   }.bind(this);
   $.get('/sketches/' + this.current_sketch_id, undefined, callback, 'json');
 };
@@ -124,40 +128,4 @@ MainApp.prototype.save = function(){
       dataType: 'JSON',
       data: {sketch: {node_data: jsonData}}
       });
-};
-
-MainApp.prototype.load = function(file){
-
-    var extension = file.name.split('.').pop();     
-    
-    //reset all
-    this.s.shapes = [];
-    this.s.connections = [];
-    this.s.selection = [];
-    this.s.hoverSelection = [];
-    this.s.valid = false;
-    
-
-    var _this = this;
-    //check for correct extension
-    if(extension == 'json'){
-  // FILE READING
-  var reader = new FileReader();
-  
-  reader.onload = function(event){
-      
-      //parse JSON
-      var jsonContents = JSON.parse(reader.result);
-      
-      var shapes = jsonContents.shapes;
-      _this.loadShapes(shapes);
-
-      var connections = jsonContents.connections;
-      _this.loadConnections(connections);
-      
-      _this.s.valid = false;
-  };
-  
-  reader.readAsText(file);    
-    }
 };
