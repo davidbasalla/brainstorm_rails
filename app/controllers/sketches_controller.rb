@@ -67,6 +67,6 @@ class SketchesController < ApplicationController
   end
 
   def new_sketch_name
-    "sketch_#{Sketch.all.count}"
+    "sketch_#{Sketch.where(user_id: current_user.id).count}"
   end
 end
